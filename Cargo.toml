@@ -1,0 +1,49 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/tun2proxy-core",
+    "crates/tun2proxy-proxy",
+    "crates/tun2proxy-cli",
+]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT"
+authors = ["Max Lv <max.c.lv@gmail.com>"]
+repository = "https://github.com/madeye/tun2proxy"
+homepage = "https://github.com/madeye/tun2proxy"
+readme = "README.md"
+
+[workspace.dependencies]
+tokio = { version = "1.40", features = ["rt-multi-thread", "net", "io-util", "sync", "time", "macros"] }
+tokio-util = { version = "0.7", features = ["codec"] }
+futures = "0.3"
+bytes = "1.7"
+thiserror = "1.0"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4.5", features = ["derive", "env"] }
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+url = "2.5"
+
+# Networking
+netstack-smoltcp = "0.2"
+smoltcp = { version = "0.12", default-features = false, features = ["std", "log", "medium-ip", "proto-ipv4", "proto-ipv6", "socket-tcp", "socket-udp"] }
+tun = { version = "0.8", features = ["async"] }
+
+# Proxy clients
+tokio-socks = "0.5"
+httparse = "1.9"
+h2 = "0.4"
+tokio-rustls = "0.26"
+rustls-native-certs = "0.8"
+base64 = "0.22"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

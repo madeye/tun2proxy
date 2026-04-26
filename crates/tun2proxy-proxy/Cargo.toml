@@ -1,0 +1,25 @@
+[package]
+name = "tun2proxy-proxy"
+description = "Upstream proxy clients (SOCKS5, HTTP/1.1 CONNECT, HTTPS CONNECT, HTTP/2 CONNECT) for tun2proxy."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+
+[dependencies]
+tokio = { workspace = true }
+futures = { workspace = true }
+bytes = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+tokio-socks = { workspace = true }
+httparse = { workspace = true }
+h2 = { workspace = true }
+tokio-rustls = { workspace = true }
+rustls-native-certs = { workspace = true }
+base64 = { workspace = true }

@@ -1,0 +1,26 @@
+[package]
+name = "tun2proxy-cli"
+description = "Command-line driver for the tun2proxy library."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+
+[[bin]]
+name = "tun2proxy"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { workspace = true }
+anyhow = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+tun2proxy-core = { path = "../tun2proxy-core" }
+tun2proxy-proxy = { path = "../tun2proxy-proxy" }
