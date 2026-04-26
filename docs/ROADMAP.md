@@ -10,8 +10,6 @@ commit hash.
 
 | #   | Branch                          | Scope                                                                                                                                            | Exit criteria                                                              |
 | --- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| M0  | `chore/bootstrap-docs`          | Workspace skeleton + crate stubs, `LICENSE`, `README.md`, `CLAUDE.md`, `AGENTS.md`, `docs/{PRD,ROADMAP,TODO}.md`, `.github/workflows/ci.yml`, `.gitignore`, `rustfmt.toml`, `clippy.toml`. | `cargo check --workspace` succeeds; pre-push gate green; docs render.       |
-| M1  | `feat/core-tun-netstack`        | TUN device wrapper, `netstack-smoltcp` wiring, single-owner packet I/O loop, loopback integration test piping packets through the stack.         | Loopback test green on macOS + Linux; no packet drops in 10 s soak.        |
 | M2  | `feat/proxy-socks5`             | `Socks5Connector` (NoAuth + UserPass) on `tokio-socks`. CLI `--proxy socks5://…`. e2e test against a `3proxy` Docker container.                  | TCP relay e2e through SOCKS5 with and without auth; clippy clean.          |
 | M3  | `feat/proxy-http-connect`       | `HttpConnectConnector` (HTTP/1.1) and `HttpsConnectConnector` (TLS-wrapped). Optional Basic auth. ProxyUrl parser shared across connectors.      | E2E test through `mitmproxy` and `squid` (HTTP and HTTPS).                 |
 | M4  | `feat/proxy-http2-connect`      | `Http2ConnectConnector` (RFC 8441 extended `CONNECT`) with ALPN `h2` and connection multiplexing. Per-target connection pool.                    | E2E test against an `nginx`/`envoy` HTTP/2 `CONNECT` proxy.                |
@@ -23,7 +21,10 @@ commit hash.
 
 ## Done
 
-_(Empty until M0 lands.)_
+| #   | Branch                          | Scope                                                                                                                                            | Exit criteria                                                              | Merge      |
+| --- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ---------- |
+| M0  | `chore/bootstrap-docs`          | Workspace skeleton + crate stubs, `LICENSE`, `README.md`, `CLAUDE.md`, `AGENTS.md`, `docs/{PRD,ROADMAP,TODO}.md`, `.github/workflows/ci.yml`, `.gitignore`, `rustfmt.toml`, `clippy.toml`. | `cargo check --workspace` succeeds; pre-push gate green; docs render.       | PR #1      |
+| M1  | `feat/core-tun-netstack`        | TUN device wrapper, `netstack-smoltcp` wiring, packet-pump loop, `Session` + SNI/HTTP-Host sniffer, integration test that completes a TCP 3-way handshake against the netstack. | 1 000-packet pump test + TCP 3WHS test green on macOS + Linux.             | PR #2 _(filled at merge)_ |
 
 ## Deferred to v2+
 
