@@ -3,7 +3,7 @@
 Per-milestone task lists. Strike off items in the same PR that lands
 the milestone. Open questions live at the bottom.
 
-## M0 — `chore/bootstrap-docs`
+## M0 — `chore/bootstrap-docs` ✅
 
 - [x] Workspace `Cargo.toml` with shared `[workspace.dependencies]`.
 - [x] `crates/tun2proxy-core` stub (`#![forbid(unsafe_code)]`, README).
@@ -14,21 +14,19 @@ the milestone. Open questions live at the bottom.
 - [x] `CLAUDE.md` (guardrails) + `AGENTS.md` (mirror).
 - [x] `docs/PRD.md`, `docs/ROADMAP.md`, `docs/TODO.md`.
 - [x] `.gitignore`, `rustfmt.toml`, `clippy.toml`.
-- [ ] `.github/workflows/ci.yml` (fmt + clippy + test on macOS + Ubuntu).
-- [ ] Pre-push gate green: `cargo fmt --all -- --check && cargo clippy --all-targets --all-features -- -D warnings && cargo test --all`.
+- [x] `.github/workflows/ci.yml` (fmt + clippy + test on macOS + Ubuntu).
+- [x] Pre-push gate green: `cargo fmt --all -- --check && cargo clippy --all-targets --all-features -- -D warnings && cargo test --all`.
 
-## M1 — `feat/core-tun-netstack`
+## M1 — `feat/core-tun-netstack` ✅
 
-- [ ] `TunDevice` trait (`AsyncRead + AsyncWrite + Send`).
-- [ ] Default impl using `tun = "0.8"` with `features = ["async"]`.
-- [ ] `Stack` builder wrapping `netstack_smoltcp::StackBuilder`.
-- [ ] Single-owner packet loop: TUN reader → stack ingress mpsc; stack
-      egress mpsc → TUN writer; both joined under one `tokio::select!`.
-- [ ] `Session { src, dst, protocol, hostname_hint }` type.
-- [ ] Best-effort SNI / HTTP `Host` sniffer for `hostname_hint`.
-- [ ] Loopback integration test: open a pair of in-memory TUN halves,
-      push N packets, assert N received with no drops.
-- [ ] CI: enable on macOS + Ubuntu.
+- [x] `tun::open` returning `Framed<AsyncDevice, TunPacketCodec>` (Stream + Sink of `Vec<u8>`) using `tun = "0.8"` with `features = ["async"]`.
+- [x] `stack::build` wrapping `netstack_smoltcp::StackBuilder` with `StackOptions` defaults; returns `StackHandles { stack, runner, tcp_listener, udp_socket }`.
+- [x] Generic `relay::pump` (Stream → Sink) usable for tun↔stack bridging and unit-testable on in-memory mpsc pairs.
+- [x] `Session { src, dst, protocol, hostname_hint }` + `Protocol` enum.
+- [x] Best-effort SNI / HTTP `Host` sniffer (`sniff::sniff`) — non-allocating parse, malformed-input safe.
+- [x] Pump integration test: 1 000 packets through `relay::pump`, ordered, no drops.
+- [x] Real-stack integration test: 3-way handshake against the netstack via synthesized TCP via `smoltcp::wire`, asserts `TcpListener` emits a `TcpStream`.
+- [x] CI on macOS + Ubuntu.
 
 ## M2 — `feat/proxy-socks5`
 

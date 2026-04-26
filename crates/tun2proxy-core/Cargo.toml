@@ -20,3 +20,9 @@ tracing = { workspace = true }
 netstack-smoltcp = { workspace = true }
 smoltcp = { workspace = true }
 tun = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "time", "io-util"] }
+tokio-stream = "0.1"
+futures = { workspace = true }
+smoltcp = { workspace = true }
