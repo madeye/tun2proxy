@@ -1,0 +1,22 @@
+[package]
+name = "tun2proxy-core"
+description = "Core engine: TUN device + netstack-smoltcp + session relay for tun2proxy."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+
+[dependencies]
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+bytes = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+netstack-smoltcp = { workspace = true }
+smoltcp = { workspace = true }
+tun = { workspace = true }
